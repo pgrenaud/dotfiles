@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Dotfiles directory
+DOTFILES="$HOME/.dotfiles"
+
+echo "Installing dotfiles to $DOTFILES ..."
+echo
+
+# Install dotfiles
+git clone https://github.com/pgrenaud/dotfiles.git $DOTFILES
+cd $DOTFILES
+
+echo
+echo "Bootstrapping dotfiles ..."
+
+# Bootstrap dotfiles
+./bootstrap
