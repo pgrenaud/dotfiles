@@ -21,6 +21,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/pgrenaud/dotfiles/master
 
 And restart your terminal.
 
+Configuration
+=============
+
+Don't forget to change your Git user/email in `~/.gitconfig.local`
+
 Inspiration
 ===========
 
