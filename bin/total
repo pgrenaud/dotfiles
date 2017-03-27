@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+name="$@"
+
+echo $name
+
+#echo $(ps aux | grep -v grep | grep -i "$@" | wc -l) proceses found
+ps aux | egrep -v 'grep|total' | grep -i "$name" | wc -l | awk '{print $1" proceses found"}'
+
+ps aux | egrep -v 'grep|total' | grep -i "$name" | tr -s ' ' | cut -d ' ' -f 6 | awk '{s+=$1} END {print s}' | awk '{print $1/1024" mb"}'

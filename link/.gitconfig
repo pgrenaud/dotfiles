@@ -1,0 +1,20 @@
+[push]
+	default = simple
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[include]
+	path = .gitconfig.local
+[alias]
+	co = commit
+	ck = checkout
+	st = status
+	br = branch
+	tree = log --oneline --graph --decorate
+	tree-all = log --oneline --graph --decorate --all
+

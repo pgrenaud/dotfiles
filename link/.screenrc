@@ -1,0 +1,5 @@
+startup_message off
+
+defscrollback 100000
+
+hardstatus alwayslastline "%{b w}%S %{w}| %{b}%H %{w}| %{g}%Y-%m-%d %{w}| %{c}%c %{w}| %{y}%l %{w}| %{-b kw}%u %-Lw%{= mW}%50> %n%f %t %{-}%+Lw%<"

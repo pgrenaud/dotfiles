@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+git rev-parse || exit 1
+
+env=${1-dev}
+
+directory=$(pwd)
+
+cd $(git rev-parse --show-toplevel)
+
+php app/console cache:clear --env=$env --no-warmup
+php app/console cache:warm --env=$env
+php app/console assets:install web
+php app/console assetic:dump web
+
+cd $directory

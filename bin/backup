@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+################################################################################
+# Script name: backup
+# Creator: pgrenaud
+# Creation date: 2009-11-09
+# Last updates: 2011-09-20, 2016-10-13
+# Description: Create a backup copy of the given file or directory.
+# Syntax: backup [-v] filename
+################################################################################
+
+#
+# Basic setup
+#
+
+# Get the current script name
+basename=$(basename $0)
+
+# Function usage: Show the script syntax and quit
+function usage()
+{
+    echo "syntax: $basename [-v] filename" >&2
+    exit 1
+}
+
+# Default values
+filename=$1
+verbose=0
+
+#
+# Parameters checks
+#
+
+# Number of parameters check
+if [ $# -lt 1 -o $# -gt 2 ]; then
+    echo "$basename: Incorrect number of parameters" >&2
+    usage
+fi
+
+# First parameter check when they are two parameters
+if [ $# -eq 2 ]; then
+    if [ "$1" = "-v" ]; then
+        filename=$2
+        verbose=1
+    else
+        echo "$basename: Incorrect parameters" >&2
+        usage
+    fi
+fi
+
+#
+# Script execution
+#
+
+# Remove any trailing slash
+filename=$(echo $filename | sed -e "s/\/*$//")
+
+# Get the backup filename
+backupfilename=$filename.$(date "+%y%m%d")
+
+# Copy checks
+if [ ! -e $filename ]; then
+    echo "$basename: File $filename does not exists" >&2
+    exit 2
+elif [ ! -f $filename -a ! -d $filename ]; then
+    echo "$basename: File $filename is not an ordinary file" >&2
+    exit 2
+elif [ ! -r $filename ]; then
+    echo "$basename: File $filename is not readable" >&2
+    exit 2
+elif [ -e $backupfilename ]; then
+    echo "$basename: File $backupfilename already exists" >&2
+    exit 2
+elif [ ! -w . ]; then
+    echo "$basename: Parent directory of file $filename is not writable" >&2
+    exit 2
+fi
+
+# Actually do the backup
+cp -a $filename $backupfilename
+
+# Show success message if desired
+if [ $verbose -eq 1 -a $? -eq 0 ]; then
+    echo "$basename: File $filename has been copied with the name $backupfilename"
+fi
+
+exit 0

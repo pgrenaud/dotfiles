@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+#
+# Basic setup
+#
+
+# Get the current script name
+basename=$(basename $0)
+
+# Function usage: Show the script syntax and quit
+function usage()
+{
+    echo "syntax: $basename twitch_user" >&2
+    exit 1
+}
+
+# Default values
+user=$1
+
+#
+# Parameters checks
+#
+
+# Number of parameters check
+if [ $# -ne 1 ] ; then
+    echo "$basename: Incorrect number of parameters" >&2
+    usage
+fi
+
+#
+# Script execution
+#
+
+/usr/local/bin/livestreamer https://www.twitch.tv/${user} source > /dev/null 2>&1 &
