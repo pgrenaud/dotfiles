@@ -13,7 +13,6 @@ shopt -s checkwinsize
 shopt -s histappend
 
 # Don't put duplicate lines in the history. See bash(1) for more options
-#export HISTCONTROL=ignoredups
 export HISTCONTROL=ignoreboth
 
 # The maximum number of lines contained in the history file.
@@ -80,9 +79,9 @@ alias lla='ls -lha'
 alias lda='ls -lhrta'
 alias cdd='cd ..'
 alias suu='su -'
-#alias vi='vim'
-#alias diff='colordiff'
+alias colorless='less -R'
 alias wgetncc='wget --no-check-certificate'
+alias history-delete-last='history -d $((HISTCMD-1))'
 alias here='open .'
 
 # Subversion
