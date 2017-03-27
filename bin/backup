@@ -4,7 +4,7 @@
 # Script name: backup
 # Creator: pgrenaud
 # Creation date: 2009-11-09
-# Last updates: 2011-09-20, 2016-10-13
+# Last updates: 2011-09-20, 2016-10-13, 2017-03-26
 # Description: Create a backup copy of the given file or directory.
 # Syntax: backup [-v] filename
 ################################################################################
@@ -55,29 +55,32 @@ fi
 # Remove any trailing slash
 filename=$(echo $filename | sed -e "s/\/*$//")
 
+# Get parent directory
+parent=$(dirname "$filename")
+
 # Get the backup filename
 backupfilename=$filename.$(date "+%y%m%d")
 
 # Copy checks
-if [ ! -e $filename ]; then
+if [ ! -e "$filename" ]; then
     echo "$basename: File $filename does not exists" >&2
     exit 2
-elif [ ! -f $filename -a ! -d $filename ]; then
+elif [ ! -f "$filename" -a ! -d "$filename" ]; then
     echo "$basename: File $filename is not an ordinary file" >&2
     exit 2
-elif [ ! -r $filename ]; then
+elif [ ! -r "$filename" ]; then
     echo "$basename: File $filename is not readable" >&2
     exit 2
-elif [ -e $backupfilename ]; then
+elif [ -e "$backupfilename" ]; then
     echo "$basename: File $backupfilename already exists" >&2
     exit 2
-elif [ ! -w . ]; then
-    echo "$basename: Parent directory of file $filename is not writable" >&2
+elif [ ! -w "$parent" ]; then
+    echo "$basename: Directory $parent is not writable" >&2
     exit 2
 fi
 
 # Actually do the backup
-cp -a $filename $backupfilename
+cp -a "$filename" "$backupfilename"
 
 # Show success message if desired
 if [ $verbose -eq 1 -a $? -eq 0 ]; then
