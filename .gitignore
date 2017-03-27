@@ -1,3 +1,6 @@
+# dotfiles
+/backups/
+
 # vim
 .*.sw[a-p]
 

@@ -5,11 +5,134 @@ echo '  __| | ___ | |_ / _(_) | ___  ___ '
 echo ' / _` |/ _ \| __| |_| | |/ _ \/ __|'
 echo '| (_| | (_) | |_|  _| | |  __/\__ \'
 echo ' \__,_|\___/ \__|_| |_|_|\___||___/'
-echo
+
+#
+# Basic setup
+#
 
 # Dotfiles directory
 DOTFILES="$HOME/.dotfiles"
 
-# TODO
+# Echo functions
+function e_header()  { echo -e "\n\e[1m$@\e[0m"; }
+function e_success() { echo -e " \e[1;32m✔\e[0m $@"; }
+function e_error()   { echo -e " \e[1;31m✖\e[0m $@"; }
+function e_arrow()   { echo -e " \e[1;34m➜\e[0m $@"; }
+
+#
+# Environment checks
+#
+
+if [ ! -d "$DOTFILES" ]; then
+    e_error "Directory ~/.dotfiles does not exists, exiting ..."
+    exit 1
+fi
+
+#
+# Function definitions
+#
+
+function backup_file()
+{
+    local file=$1
+
+    # Set backup flag, so a nice message can be shown at the end
+    BACKUP=1
+    # Create backup dir if it doesn't already exist
+    [ -e "$BACKUP_DIR" ] || mkdir -p "$BACKUP_DIR"
+
+    e_arrow "Backing up $file"
+    mv "$file" "$BACKUP_DIR"
+}
+
+function create_directory()
+{
+    local directory=$1
+
+    if [ ! -d "$directory" ]; then
+        if [ -e "$directory" ]; then
+            e_error "File $directory exists but is not a directory, exiting ..."
+            exit 1
+        else
+            e_success "Creating directory $directory"
+            mkdir "$directory"
+        fi
+    fi
+}
+
+function link_file()
+{
+    local src=$1
+    local dest=$2
+
+    if [ -e "$dest" -a ! -L "$dest" ]; then
+        backup_file "$dest"
+    fi
+
+    e_success "Linking $src -> $dest"
+    ln -rsfn "$src" "$dest"
+}
+
+function copy_file()
+{
+    local src=$1
+    local dest=$2
+
+    if [ -e "$dest" ]; then
+        e_error "File $dest exists"
+    else
+        e_success "Copying $src -> $dest"
+        cp "$src" "$dest"
+    fi
+}
+
+function process_recursive()
+{
+    local action=$1
+    local files=($2/*)
+    local parent=$3
+
+    for file in "${files[@]}"; do
+        local base="$(basename $file)"
+        local dest="$parent/$base"
+
+        if [ -d "$file" ]; then
+            create_directory "$dest"
+            process_recursive "$action" "$file" "$dest"
+        else
+            "$action" "$file" "$dest"
+        fi
+    done
+}
+
+#
+# Script execution
+#
+
+# Tweak file globbing
+shopt -s dotglob
+shopt -s nullglob
+
+# If backups are needed, this is where they'll go
+BACKUP_DIR="$DOTFILES/backups/$(date "+%Y%m%d-%H%M%S")/"
+BACKUP=
+
+e_header "Linking files"
+process_recursive "link_file" "$DOTFILES/link" "$HOME"
+
+e_header "Copying files"
+process_recursive "copy_file" "$DOTFILES/copy" "$HOME"
+
+e_header "Linking ~/bin directory"
+link_file "$DOTFILES/bin" "$HOME/bin"
+
+# Display if backups were made
+if [ "$BACKUP" ]; then
+    e_header "Backups"
+    e_arrow "Existing files were moved to $BACKUP_DIR"
+fi
+
+# All done!
+e_header "All done!"
 
 exit 0
