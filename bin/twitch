@@ -31,4 +31,4 @@ fi
 # Script execution
 #
 
-/usr/local/bin/livestreamer https://www.twitch.tv/${user} source > /dev/null 2>&1 &
+/usr/local/bin/livestreamer https://www.twitch.tv/${user} best > /dev/null 2>&1 &
