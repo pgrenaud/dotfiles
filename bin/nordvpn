@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+import operator
+import pprint
+
+import requests
+
+NORDVPN_CANADA_P2P = 'https://nordvpn.com/wp-admin/admin-ajax.php?group=P2P&country=Canada&action=getGroupRows'
+
+REQUESTS_TIMEOUT = 30
+
+r = requests.get(NORDVPN_CANADA_P2P, timeout=REQUESTS_TIMEOUT)
+
+# TODO: check response status
+
+data = r.json()
+
+data_sorted = sorted(data, key=operator.itemgetter('load'))
+
+for server in data_sorted[:10]:
+    print('{}: {}%'.format(server.get('domain'), server.get('load')))
+
+#print()
+#pprint.pprint(data_sorted[0])
