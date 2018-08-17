@@ -19,4 +19,3 @@
 	pr = merge --no-ff
 	tree = log --oneline --graph --decorate
 	tree-all = log --oneline --graph --decorate --all
-

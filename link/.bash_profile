@@ -105,7 +105,6 @@ svndiff()
     svn diff "${@}" | colordiff
 }
 
-
 #
 # Completion execution
 #
