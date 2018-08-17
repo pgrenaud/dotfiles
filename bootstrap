@@ -123,9 +123,6 @@ process_recursive "link_file" "$DOTFILES/link" "$HOME"
 e_header "Copying files"
 process_recursive "copy_file" "$DOTFILES/copy" "$HOME"
 
-e_header "Linking ~/bin directory"
-link_file "$DOTFILES/bin" "$HOME/bin"
-
 # Display if backups were made
 if [ "$BACKUP" ]; then
     e_header "Backups"
