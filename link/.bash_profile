@@ -13,26 +13,41 @@ shopt -s checkwinsize
 shopt -s histappend
 
 # Don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth
 
 # The maximum number of lines contained in the history file.
-export HISTFILESIZE=100000
+HISTFILESIZE=100000
 
 # The number of commands to remember in the command history.
-export HISTSIZE=50000
+HISTSIZE=50000
 
 #
 # Path definitions
 #
 
-# GNU tools by default
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-
 # Android SDK
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
+# GNU tools by default
+if [ -d "/usr/local/opt/coreutils/libexec/gnubin" ] ; then
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+fi
+if [ -d "/usr/local/opt/coreutils/libexec/gnuman" ] ; then
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
+
+# Composer
+if [ -d "$HOME/.composer/vendor/bin" ] ; then
+    export PATH="$HOME/.composer/vendor/bin:$PATH"
+fi
+
 # set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.dotfiles/bin" ] ; then
+    export PATH="$HOME/.dotfiles/bin:$PATH"
+fi
+if [ -d "$HOME/.local/bin" ] ; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 if [ -d "$HOME/bin" ] ; then
     export PATH="$HOME/bin:$PATH"
 fi
@@ -47,7 +62,7 @@ fi
 #
 
 # Prompt
-export PS1='\[\e[01;32m\]\u\[\e[01;33m\]@\[\e[01;34m\]\h\[\e[01;37m\]:\[\e[01;36m\]\w\[\e[01;37m\]\$\[\e[00m\] '
+PS1='\[\e[01;32m\]\u\[\e[01;33m\]@\[\e[01;34m\]\h\[\e[01;37m\]:\[\e[01;36m\]\w\[\e[01;37m\]\$\[\e[00m\] '
 
 #
 # Colors definitions
