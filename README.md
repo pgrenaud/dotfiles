@@ -16,7 +16,7 @@ Installation
 Run the following:
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/pgrenaud/dotfiles/master/install)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/pgrenaud/dotfiles/master/bootstrap)"
 ```
 
 And restart your terminal.
