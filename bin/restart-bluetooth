@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+blueutil -p 0 && sleep 1 && blueutil -p 1
