@@ -20,6 +20,7 @@
 	st = status
 	br = branch
 	ff = merge --ff-only
-	pr = merge --no-ff
+	pr = merge --no-ff --no-edit
+	force-push = push --force-with-lease
 	tree = log --oneline --graph --decorate
 	tree-all = log --oneline --graph --decorate --all
