@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# &> /dev/null &
+adb shell "while true; do screenrecord --bit-rate=16m --output-format=h264 --size 540x960 - ; done" | ffplay -framerate 60 -framedrop -bufsize 16M -
