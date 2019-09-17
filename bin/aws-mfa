@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#
+# Script execution
+#
+
+# https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/
+# https://github.com/vancluever/aws-runas
+aws-runas --no-role --duration 86400
