@@ -10,6 +10,8 @@
 	diff = auto
 	status = auto
 	branch = auto
+[interactive]
+	singleKey = yes
 [include]
 	path = .gitconfig.local
 [alias]
