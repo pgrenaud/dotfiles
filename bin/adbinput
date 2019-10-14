@@ -52,6 +52,8 @@ def main():
             value = get_input('> ')
         except KeyboardInterrupt:
             break
+        except EOFError:
+            break
 
         command = 'adb shell "input keyboard text \'{}\'"'.format(value)
         invoke_command(command)
