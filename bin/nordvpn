@@ -5,7 +5,7 @@ import pprint
 
 import requests
 
-NORDVPN_CANADA_P2P = 'https://nordvpn.com/wp-admin/admin-ajax.php?group=P2P&country=Canada&action=getGroupRows'
+NORDVPN_CANADA_P2P = 'https://nordvpn.com/wp-admin/admin-ajax.php?action=servers_recommendations&filters={%22country_id%22:227,%22servers_groups%22:[9]}'
 
 REQUESTS_TIMEOUT = 30
 
@@ -18,7 +18,7 @@ data = r.json()
 data_sorted = sorted(data, key=operator.itemgetter('load'))
 
 for server in data_sorted[:10]:
-    print('{}: {}%'.format(server.get('domain'), server.get('load')))
+    print('{}: {}%'.format(server.get('hostname'), server.get('load')))
 
 #print()
 #pprint.pprint(data_sorted[0])
