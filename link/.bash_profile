@@ -109,6 +109,7 @@ alias wgetncc='wget --no-check-certificate'
 alias history-delete-last='history -d $((HISTCMD-1))'
 alias here='open .'
 alias fat-composer='COMPOSER_MEMORY_LIMIT=-1 composer'
+alias awsume='. awsume'
 
 # Subversion
 svndiff()
