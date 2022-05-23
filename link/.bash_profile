@@ -25,6 +25,16 @@ HISTSIZE=50000
 # Path definitions
 #
 
+# HOMEBREW BEGIN
+export HOMEBREW_PREFIX="/usr/local"
+export HOMEBREW_CELLAR="/usr/local/Cellar"
+export HOMEBREW_REPOSITORY="/usr/local/Homebrew"
+export HOMEBREW_SHELLENV_PREFIX="/usr/local"
+#export PATH="/usr/local/bin:/usr/local/sbin${PATH+:$PATH}"
+export MANPATH="/usr/local/share/man${MANPATH+:$MANPATH}"
+export INFOPATH="/usr/local/share/info${INFOPATH+:$INFOPATH}"
+# HOMEBREW END
+
 # Android SDK
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
