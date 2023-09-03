@@ -33,6 +33,7 @@ export HOMEBREW_SHELLENV_PREFIX="/usr/local"
 #export PATH="/usr/local/bin:/usr/local/sbin${PATH+:$PATH}"
 export MANPATH="/usr/local/share/man${MANPATH+:$MANPATH}"
 export INFOPATH="/usr/local/share/info${INFOPATH+:$INFOPATH}"
+export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
 # HOMEBREW END
 
 # Android SDK
