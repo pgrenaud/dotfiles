@@ -111,6 +111,7 @@ alias history-delete-last='history -d $((HISTCMD-1))'
 alias here='open .'
 alias fat-composer='COMPOSER_MEMORY_LIMIT=-1 composer'
 alias awsume='. awsume'
+alias totp='read -s SECRET; oathtool --base32 --totp "$SECRET" | tr -d "\n" | pbcopy; unset SECRET'
 
 # Subversion
 svndiff()
