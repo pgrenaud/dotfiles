@@ -10,10 +10,14 @@
 	<string></string>
 	<key>KLInfo_U.S. Custom</key>
 	<dict>
+		<key>TICapsLockLanguageSwitchCapable</key>
+		<false/>
+		<key>TISIconIsTemplate</key>
+		<false/>
 		<key>TISInputSourceID</key>
 		<string>org.sil.ukelele.keyboardlayout.us-custom.u.s.custom</string>
 		<key>TISIntendedLanguage</key>
-		<string></string>
+		<string>en</string>
 	</dict>
 </dict>
 </plist>
