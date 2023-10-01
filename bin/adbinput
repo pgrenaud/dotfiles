@@ -55,8 +55,17 @@ def main():
         except EOFError:
             break
 
-        command = 'adb shell "input keyboard text \'{}\'"'.format(value)
-        invoke_command(command)
+        value = value.replace('\\', '\\\\').replace('"', '\\\"')
+        values = value.split("'")
+
+        for i, value in enumerate(values):
+            if i != 0:
+                command = 'adb shell input keyevent 75'  # send quote
+                invoke_command(command)
+
+            if value != '':
+                command = 'adb shell "input keyboard text \'{}\'"'.format(value)
+                invoke_command(command)
 
     print()
     print()
