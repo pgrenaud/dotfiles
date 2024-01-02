@@ -25,20 +25,35 @@ HISTSIZE=50000
 # Path definitions
 #
 
-# HOMEBREW BEGIN
-export HOMEBREW_PREFIX="/opt/homebrew";
-export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
-export HOMEBREW_REPOSITORY="/opt/homebrew";
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
-export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+# Homebrew
+if [ -d "/usr/local/Cellar" ] ; then
+    export HOMEBREW_PREFIX="/usr/local";
+    export HOMEBREW_CELLAR="/usr/local/Cellar";
+    export HOMEBREW_REPOSITORY="/usr/local/Homebrew";
+    export PATH="/usr/local/bin:/usr/local/sbin${PATH+:$PATH}";
+    export MANPATH="/usr/local/share/man${MANPATH+:$MANPATH}:";
+    export INFOPATH="/usr/local/share/info:${INFOPATH:-}";
+fi
+if [ -d "/opt/homebrew/Cellar" ] ; then
+    export HOMEBREW_PREFIX="/opt/homebrew";
+    export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+    export HOMEBREW_REPOSITORY="/opt/homebrew";
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+    export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+fi
 export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
-# HOMEBREW END
 
 # Android SDK
 #export ANDROID_HOME=/usr/local/opt/android-sdk
 
-# GNU tools by default
+# GNU tools
+if [ -d "/usr/local/opt/coreutils/libexec/gnubin" ] ; then
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+fi
+if [ -d "/usr/local/opt/coreutils/libexec/gnuman" ] ; then
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
 if [ -d "/opt/homebrew/opt/coreutils/libexec/gnubin" ] ; then
     export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 fi
@@ -63,6 +78,9 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 # Autojump
+if [ -r /usr/local/etc/profile.d/autojump.sh ]; then
+    . /usr/local/etc/profile.d/autojump.sh
+fi
 if [ -r /opt/homebrew/etc/profile.d/autojump.sh ]; then
     . /opt/homebrew/etc/profile.d/autojump.sh
 fi
@@ -123,6 +141,9 @@ svndiff()
 #
 
 # Enable programmable completion features
+if [ -r /usr/local/etc/profile.d/bash_completion.sh ]; then
+    . /usr/local/etc/profile.d/bash_completion.sh
+fi
 if [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ]; then
     . /opt/homebrew/etc/profile.d/bash_completion.sh
 fi
