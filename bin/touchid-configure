@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -e
+
+# This line is a safeguard to prevent adding the same line over and over if it ever changes in the future
+grep -q 'pam_tid.so' /private/etc/pam.d/sudo && ! grep -q '^auth       sufficient     pam_tid.so$' /private/etc/pam.d/sudo && exit 1
+
+# This line add the pam_tid.so entry to the pam sudo configuration file
+egrep -q '^auth       sufficient     pam_tid.so$' /private/etc/pam.d/sudo || (sudo /usr/bin/sed -i '' '2 a\
+auth       sufficient     pam_tid.so\
+' /private/etc/pam.d/sudo)
+
+# This line validates that the line was properly added
+grep -q '^auth       sufficient     pam_tid.so$' /private/etc/pam.d/sudo
+
+sudo --reset-timestamp
+
+sudo whoami
