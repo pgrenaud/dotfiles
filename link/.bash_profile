@@ -147,3 +147,17 @@ fi
 if [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ]; then
     . /opt/homebrew/etc/profile.d/bash_completion.sh
 fi
+
+# fzf completion
+if [ -r /usr/local/opt/fzf/shell/key-bindings.bash ]; then
+    . /usr/local/opt/fzf/shell/key-bindings.bash
+fi
+if [ -r /usr/local/opt/fzf/shell/completion.bash ]; then
+    . /usr/local/opt/fzf/shell/completion.bash
+fi
+if [ -r /opt/homebrew/opt/fzf/shell/key-bindings.bash ]; then
+    . /opt/homebrew/opt/fzf/shell/key-bindings.bash
+fi
+if [ -r /opt/homebrew/opt/fzf/shell/completion.bash ]; then
+    . /opt/homebrew/opt/fzf/shell/completion.bash
+fi
