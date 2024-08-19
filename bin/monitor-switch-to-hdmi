@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ -x /usr/local/bin/ddcctl ]; then
+    /usr/local/bin/ddcctl -d 1 -i 17
+    /usr/local/bin/ddcctl -d 2 -i 17
+fi
+if [ -x /opt/homebrew/bin/m1ddc ]; then
+    /opt/homebrew/bin/m1ddc display uuid=A413FAE0-1E41-403B-BF31-5E704D3BCB79 set input 17
+    /opt/homebrew/bin/m1ddc display uuid=9832B0A9-BB9B-4CDE-A299-8202950EFCDA set input 17
+fi
